@@ -1,0 +1,36 @@
+REPORT zab_07.
+*We have 2 types of controlling structure.
+*1)Branching and 2)Looping Controlling Structure
+*We have 2 -> IF , CASE
+PARAMETERS p_bukrs TYPE t001-bukrs.
+if p_bukrs = '100'.
+  write 'ABC'.
+elseif p_bukrs = '200'.
+   write 'ABC Info'.
+elseif p_bukrs = '300'.
+  write 'ABC Data'.
+else.
+  write 'Invalid Output'.
+endif.
+*Case
+*CASE p_bukrs.
+*  WHEN '100'.
+*    WRITE 'ABC'.
+*  WHEN '200'.
+*    WRITE 'ABC Info'.
+*  WHEN '300'.
+*    WRITE 'ABC For'.
+*  WHEN OTHERS.
+*    WRITE 'Invalid Output'.
+*ENDCASE.
+
+*2)Looping C.S
+*1) WHILE and 2)DO
+*DATA a TYPE i.
+*WHILE a < 5.
+*  a = a + 1.
+*  WRITE :/ a.
+*ENDWHILE.
+*DO 10 times.
+*  write :/ 'ABC Tech'.
+*enddo.
