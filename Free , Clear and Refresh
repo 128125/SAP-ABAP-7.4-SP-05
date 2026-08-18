@@ -1,0 +1,42 @@
+REPORT zab_06.
+** Free -> Refresh -> Clear
+*
+*TYPES : BEGIN OF ty,
+*        eid(10) type c,
+*        ename(25) type c,
+*        esal type i,
+*       end of ty.
+*
+*data : wa type ty,
+*       it type TABLE OF ty.
+*
+*wa-eid = '1'.
+*wa-ename = 'abhay'.
+*wa-esal = 425000.
+*append wa to it.
+*
+*loop at it into wa.
+*  WRITE : wa-eid,wa-ename,wa-esal.
+*ENDLOOP.
+*Uline.
+*
+*clear it.
+*write 'After Clear'.
+*loop at it into wa.
+*  WRITE :/ wa-eid,wa-ename,wa-esal.
+*ENDLOOP.
+*uline.
+*.........
+*Attributes of Internal Table
+Data : V1 type c,
+       V2 type I.
+Types: begin of ty_t001,
+       bukrs type t001-bukrs,
+       butxt type t001-butxt,
+       ort01 type t001-ort01,
+       end of ty_t001.
+Data : wa_t001 type ty_t001,
+       it_t001 type table of ty_t001.
+select bukrs butxt ort01 from t001 into table it_t001.
+DESCRIBE TABLE it_t001 kind v1 lines v2.
+write :/ v1,v2.
