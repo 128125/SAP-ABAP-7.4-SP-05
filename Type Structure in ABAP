@@ -1,0 +1,67 @@
+REPORT zab_03.
+*Structure / Table
+*DATA : BEGIN OF emp,
+*         eid(10)   TYPE c,
+*         ename(25) TYPE c,
+*         esal(5)   TYPE c,
+*       END OF emp.
+*
+*DATA emp1 LIKE TABLE OF emp.
+* Syntax of declaring fields/Variable
+*data <fieldname>(<length>) type <data-type>.
+*OR
+*data <fieldname> type <data element>.
+*OR
+*data <fieldname> type <DB-Table>-<Field-Name>.
+*Program for printing DB-Tables T001 Contents
+*DATA : BEGIN OF wa,
+*         bukrs TYPE t001-bukrs,
+*         butxt TYPE t001-butxt,
+*         ort01 TYPE t001-ort01,
+*       END OF wa.
+*
+*DATA it LIKE TABLE OF wa.
+*
+*SELECT bukrs butxt ort01 FROM t001 INTO table it UP TO 10 ROWS.
+*
+*  LOOP AT it INTO wa.
+*    WRITE :/ wa-bukrs,
+*             wa-butxt,
+*             wa-ort01.
+*  ENDLOOP.
+*  ULINE.
+
+** SELECT-OPTIONS
+*DATA a type t001-bukrs.
+*SELECT-OPTIONS s_bukrs for a.
+*
+*DATA : BEGIN OF wa,
+*         bukrs TYPE t001-bukrs,
+*         butxt TYPE t001-butxt,
+*         ort01 TYPE t001-ort01,
+*       END OF wa.
+*
+*DATA it LIKE TABLE OF wa.
+*
+*SELECT bukrs butxt ort01 FROM t001 INTO table it where bukrs in s_bukrs.
+*
+*  LOOP AT it INTO wa.
+*    WRITE :/ wa-bukrs,
+*             wa-butxt,
+*             wa-ort01.
+*  ENDLOOP.
+DATA a TYPE t001-ort01.
+SELECT-OPTIONS s_ort01 FOR a.
+DATA : BEGIN OF wa_t001,
+         bukrs TYPE t001-bukrs,
+         butxt TYPE t001-butxt,
+         ort01 TYPE t001-ort01,
+       END OF wa_t001.
+DATA it_t001 LIKE TABLE OF wa_t001.
+SELECT bukrs butxt ort01 FROM t001 INTO TABLE it_t001 WHERE ort01 IN s_ort01.
+
+LOOP AT it_t001 INTO wa_t001.
+  WRITE :/ wa_t001-bukrs,
+           wa_t001-butxt,
+           wa_t001-ort01.
+ENDLOOP.
