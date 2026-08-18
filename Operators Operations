@@ -1,0 +1,77 @@
+REPORT zab_02.
+*Data Types and Operators Operations in It
+*DATA : C type i.
+*
+*PARAMETERS : x TYPE i,
+*             y TYPE i.
+*
+** Mathematical Operators
+*
+**c = x + y.
+**c = x - y.
+**c = x * y.
+**c = x ** y.
+**c = x MOD y.
+*
+*WRITE c.
+**Comparative Operators
+*DATA : A TYPE i,
+*       B Type i,
+*       c type i.
+*
+*a = 10.
+*b = 20.
+*c = 10.
+*
+**IF a < b.
+**  WRITE 'a is less than b'.
+**ELSE.
+**  write 'a is greater than b'.
+**ENDIF.
+*
+*if a <= c.
+*    WRITE 'a is less than or equal to b'.
+*ELSE.
+*  write 'a is greater than b'.
+*ENDIF.
+*
+**Rest > , >= , = , <>
+*DATA a TYPE i.
+*DATA b TYPE i.
+*
+*a = 20.
+*b = 30.
+*
+*IF a <> b.
+*  WRITE 'a is not equal to b'.
+*ELSE.
+*  WRITE 'False'.
+*ENDIF.
+*Relational Operators
+* AND OR NOT
+*DATA: a TYPE i VALUE 10,
+*      b TYPE i VALUE 20.
+*
+*IF a LT b AND b GT 15.
+*  WRITE: 'Both conditions are true'.
+*ENDIF.
+
+*DATA: a TYPE i VALUE 5,
+*      b TYPE i VALUE 20.
+*
+*IF a GT 10 OR b GT 15.
+*  WRITE: 'At least one condition is true'.
+*ENDIF.
+*
+*DATA: a TYPE i VALUE 5.
+*
+*IF NOT a GT 10.
+*  WRITE: 'Condition is false, so NOT makes it true'.
+*ENDIF.
+
+DATA: a TYPE i VALUE 10,
+      b TYPE i VALUE 5,
+      c TYPE i VALUE 20.
+IF ( a GT b ) AND ( NOT c LT 15 ).
+  WRITE: 'Complex condition is true'.
+ENDIF.
