@@ -1,0 +1,194 @@
+REPORT zab_01.
+
+*First ABAP Program
+
+*DATA a TYPE i.
+
+*DATA b TYPE i.
+
+*DATA c TYPE i.
+
+*
+
+*a = 10.
+
+*b = 20.
+
+*
+
+*c = a + b.
+
+*WRITE c.
+
+*Chain Line Operator
+
+*DATA : A TYPE I,
+
+*       B TYPE I,
+
+*       C TYPE I.
+
+*
+
+*A = 100.
+
+*B = 200.
+
+*
+
+*C = A + B.
+
+*WRITE C.
+
+*Taking User Input at runtime
+
+*PARAMETERS A TYPE I.
+
+*PARAMETERS B TYPE i.
+
+*Data c type i.
+
+*
+
+*c = a + b.
+
+*write c.
+
+*Normal Program Of SAP ABAPER Job
+
+*TYPES : BEGIN OF ty_t001,
+
+*          bukrs TYPE t001-bukrs,
+
+*          butxt TYPE t001-butxt,
+
+*          ort01 TYPE t001-ort01,
+
+*        END OF ty_t001.
+
+*
+
+*DATA : wa_t001 TYPE ty_t001,
+
+*       It_t001 TYPE TABLE OF ty_t001.
+
+*
+
+*SELECT bukrs butxt ort01 FROM t001 INTO TABLE it_t001 UP TO 5 ROWS.
+
+*
+
+*LOOP AT It_t001 INTO wa_t001.
+
+*  WRITE :/ wa_t001-bukrs,wa_t001-butxt,wa_t001-ort01.
+
+*ENDLOOP.
+
+*ULINE.
+
+*Variable and Data types in ABAP
+
+*DATA: name TYPE c LENGTH 10 VALUE 'ABHAY'.
+
+*
+
+*WRITE: name.
+
+*
+
+*DATA: num TYPE n LENGTH 5 VALUE '12345'.
+
+*
+
+*WRITE: num.
+
+*
+
+*DATA: age TYPE i VALUE 25.
+
+*
+
+*WRITE: age.
+
+*
+
+*DATA: salary TYPE p DECIMALS 2 VALUE '12345.67'.
+
+*
+
+*WRITE: salary.
+
+*
+
+*DATA: pi TYPE f VALUE '3.1415'.
+
+*
+
+*WRITE: pi.
+
+*
+
+*DATA: text TYPE string VALUE 'Hello ABAP'.
+
+*
+
+*WRITE: text.
+
+*
+
+*DATA: today TYPE d VALUE '20260520'.
+
+*
+
+*WRITE: today.
+
+*
+
+*DATA: current_time TYPE t VALUE '153000'.
+
+*
+
+*WRITE: current_time.
+
+*
+
+*DATA: hexval TYPE x LENGTH 4 VALUE '1A2B'.
+
+*
+
+*WRITE: hexval.
+
+*Perform Addition
+
+*DATA A type i.
+
+*data b type i.
+
+*data c type i.
+
+*
+
+*a = 10.
+
+*b = 20.
+
+*c = a + b.
+
+*
+
+*write c.
+
+*parameters a type i.
+
+*parameters b type i.
+
+*data c type i.
+
+*
+
+*c = a - b.
+
+*
+
+*write c.
+ 
