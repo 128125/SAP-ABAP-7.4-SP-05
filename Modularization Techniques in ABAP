@@ -1,0 +1,104 @@
+REPORT ZAB_09.
+* Modularization Technique in ABAP.
+* We have 2 types of MT -> 1(Source Code Modularizing) & 2(Functionality Modularizing).
+* 1 -> Include and Macro's
+* 2 -> Subroutine and Functiona Module.
+*============================================================================================================
+* #INCLUDE
+* ZAB_INC1 , ZAB_INC2
+*INCLUDE ZAB_INC2.
+*
+*Loop AT it_t001 into wa_t001.
+*  WRITE:/ wa_t001-bukrs,
+*          wa_t001-butxt,
+*          wa_t001-ort01.
+*ENDLOOP.
+* We can't directly execute the include program. We need to execute it from the excutable program.
+*============================================================================================================
+*MACROS
+* are used to perform arithmatical operations.
+* Can take upto 9 Placeholders (&1 &2 &3 &4 ... &9)
+*DATA R TYPE I.
+*DEFINE ADDITION.
+*  r = &1 + &2 .
+*END-OF-DEFINITION.
+*ADDITION 20 10.
+*WRITE R.
+*DATA RESULT TYPE I.
+*DEFINE CAL.
+*  RESULT = &1 &2 &3.
+*END-OF-DEFINITION.
+*CAL 10 * 2.
+*WRITE RESULT.
+*CAL 25 - 10.
+*WRITE / RESULT.
+** Manually filling the Internal table by using MACROS.
+*TYPES : BEGIN OF TY_T001,
+*        BUKRS TYPE T001-BUKRS,
+*        BUTXT TYPE T001-BUTXT,
+*        ORT01 TYPE T001-ORT01,
+*        END OF TY_T001.
+*
+*DATA : WA_T001 TYPE TY_T001,
+*       IT_T001 TYPE TABLE OF TY_T001.
+*
+*DEFINE FILL_TAB.
+*  WA_T001-BUKRS = &1.
+*  WA_T001-BUTXT = &2.
+*  WA_T001-ORT01 = &3.
+*  APPEND WA_T001 TO IT_T001.
+*  CLEAR WA_T001.
+*END-OF-DEFINITION.
+*
+*FILL_TAB '1000' 'TCS' 'HYD'.
+*FILL_TAB '2000' 'HCL' 'MUM'.
+*FILL_TAB '3000' 'IBM' 'CHE'.
+*
+*LOOP AT IT_T001 INTO WA_T001.
+*  WRITE :/ WA_T001-BUKRS, WA_T001-BUTXT, WA_T001-ORT01.
+*ENDLOOP.
+*============================================================================================================
+* SUB-ROUTINES
+* Are procedure that we can define in any ABAP program & Calling from the same or some other Program.
+* Procedure is the collection of the statements.
+**Perform addition of 2 numbers by using subroutines.
+*
+*PARAMETER : P_INPUT1 TYPE I,
+*            P_INPUT2 TYPE I.
+*
+*DATA R TYPE I.
+*PERFORM ADDITION USING P_INPUT1 P_INPUT2 CHANGING R.
+*FORM ADDITION USING A TYPE I B TYPE I CHANGING C TYPE I.
+*  C = A + B.
+*  WRITE C.
+*ENDFORM.
+* There are 2 types of subroutine.
+* 1)Internal subroutine  2)External subroutine
+* 1) Internal Subroutine -> Definition and Calling in the same Program.
+* 2) External Subroutine -> Definition and calling in 2 different program.
+* Based on the given company codes to display the company codes , company name , cities using subroutine.
+*DATA V1 TYPE T001-BUKRS.
+*
+*SELECT-OPTIONS S_BUKRS FOR V1.
+*
+*TYPES : BEGIN OF TY_T001,
+*          BUKRS TYPE T001-BUKRS,
+*          BUTXT TYPE T001-BUTXT,
+*          ORT01 TYPE T001-ORT01,
+*        END OF TY_T001.
+*
+*DATA : WA_T001 TYPE TY_T001,
+*       IT_T001 TYPE TABLE OF TY_T001.
+*
+*PERFORM GET_DATA.
+*PERFORM DISPLAY_OUTPUT.
+*
+*FORM GET_DATA.
+*  SELECT BUKRS BUTXT ORT01 FROM T001 INTO TABLE IT_T001 WHERE BUKRS IN S_BUKRS.
+*ENDFORM.
+*
+*FORM DISPLAY_OUTPUT.
+*  LOOP AT IT_T001 INTO WA_T001.
+*    WRITE:/ WA_T001-BUKRS , WA_T001-BUTXT , WA_T001-ORT01.
+*  ENDLOOP.
+*ENDFORM.
