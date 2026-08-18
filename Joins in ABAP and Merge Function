@@ -1,0 +1,172 @@
+REPORT ZAB_08.
+* Joins in ABAP
+* We have 2 types of Joins 1) Inner Join & 2) Left Outer Join
+*==================================================================================================================================
+* Inner Join
+*==================================================================================================================================
+* Based on the Company codes to display the Company Codes , Company Names and Customer Numbers by using Inner Join.
+*TABLES T001.
+*SELECT-OPTIONS S_BUKRS FOR T001-BUKRS.
+*TYPES : BEGIN OF TY_FINAL,
+*          BUKRS TYPE T001-BUKRS,
+*          BUTXT TYPE T001-BUTXT,
+*          KUNNR TYPE KNB1-KUNNR,
+*        END OF TY_FINAL.
+*
+*DATA : WA_FINAL TYPE TY_FINAL,
+*       IT_FINAL TYPE TABLE OF TY_FINAL.
+*
+*SELECT T001~BUKRS T001~BUTXT KNB1~KUNNR INTO TABLE IT_FINAL
+*FROM T001 INNER JOIN KNB1 ON T001~BUKRS = KNB1~BUKRS
+*WHERE T001~BUKRS IN S_BUKRS.
+*
+*LOOP AT IT_FINAL INTO WA_FINAL.
+*  WRITE :/ WA_FINAL-BUKRS,
+*           WA_FINAL-BUTXT,
+*           WA_FINAL-KUNNR.
+*ENDLOOP.
+*==================================================================================================================================
+* Based on the Material Numbers to display the Material numbers , material types , plant numbers and plant name by using Inner Join
+* MARA , MARC , T001W
+*TABLES MARA.
+*SELECT-OPTIONS S_MATNR FOR MARA-MATNR.
+*
+*TYPES : BEGIN OF TY_FINAL,
+*          MATNR TYPE MARA-MATNR,
+*          MTART TYPE MARA-MTART,
+*          WERKS TYPE MARC-WERKS,
+*          NAME1 TYPE T001W-NAME1,
+*        END OF TY_FINAL.
+*
+*DATA : WA_FINAL TYPE TY_FINAL,
+*       IT_FINAL TYPE TABLE OF TY_FINAL.
+*
+*SELECT MARA~MATNR MARA~MTART MARC~WERKS T001W~NAME1 INTO TABLE IT_FINAL
+*FROM MARA INNER JOIN MARC ON MARA~MATNR = MARC~MATNR
+*          INNER JOIN T001W ON MARC~WERKS = T001W~WERKS
+*WHERE MARA~MATNR IN S_MATNR.
+*
+*LOOP AT IT_FINAL INTO WA_FINAL.
+*  WRITE :/ WA_FINAL-MATNR ,WA_FINAL-MTART ,WA_FINAL-WERKS ,WA_FINAL-NAME1.
+*ENDLOOP.
+*==================================================================================================================================
+* Based on the given vendor numbers to display the vendor number, vendor names , purchase document number , document dates ,
+* item numbers , Quantity , unit of measurment , Net price by using Inner Join.
+*TABLES LFA1.
+*SELECT-OPTIONS S_LIFNR FOR LFA1-LIFNR.
+*
+*TYPES : BEGIN OF TY_FINAL,
+*          LIFNR TYPE LFA1-LIFNR,
+*          NAME1 TYPE LFA1-NAME1,
+*          EBELN TYPE EKKO-EBELN,
+*          BEDAT TYPE EKKO-BEDAT,
+*          EBELP TYPE EKPO-EBELP,
+*          MENGE TYPE EKPO-MENGE,
+*          MEIND TYPE EKPO-MEINS,
+*          NETPR TYPE EKPO-NETPR,
+*        END OF TY_FINAL.
+*
+*DATA : WA_FINAL TYPE TY_FINAL,
+*       IT_FINAL TYPE TABLE OF TY_FINAL.
+*
+*SELECT LFA1~LIFNR LFA1~NAME1 EKKO~EBELN EKKO~BEDAT EKPO~EBELP EKPO~MENGE EKPO~MEINS EKPO~NETPR INTO TABLE IT_FINAL
+*FROM LFA1 INNER JOIN EKKO ON LFA1~LIFNR = EKKO~LIFNR
+*          INNER JOIN EKPO ON EKKO~EBELN = EKPO~EBELN
+*WHERE LFA1~LIFNR IN S_LIFNR.
+*
+*LOOP AT IT_FINAL INTO WA_FINAL.
+*WRITE :/
+*   WA_FINAL-LIFNR,
+*   WA_FINAL-NAME1,
+*   WA_FINAL-EBELN,
+*   WA_FINAL-BEDAT,
+*   WA_FINAL-EBELP,
+*   WA_FINAL-MENGE,
+*   WA_FINAL-MEINS,
+*   WA_FINAL-NETPR.
+*ENDLOOP.
+*==================================================================================================================================
+* Based on the given customer number to display customer number , customer name , vendor numbers and vendor name using Inner Join.
+*TABLES T001.
+*SELECT-OPTIONS S_BUKRS FOR T001-BUKRS.
+*
+*TYPES : BEGIN OF TY_FINAL,
+*          BUKRS TYPE T001-BUKRS,
+*          BUTXT TYPE T001-BUTXT,
+*          LIFNR TYPE LFB1-LIFNR,
+*          NAME1 TYPE LFA1-NAME1,
+*        END OF TY_FINAL.
+*
+*DATA : WA_FINAL TYPE TY_FINAL,
+*       IT_FINAL TYPE TABLE OF TY_FINAL.
+*
+*SELECT T001~BUKRS T001~BUTXT LFB1~LIFNR LFA1~NAME1 INTO TABLE IT_FINAL
+*FROM T001 INNER JOIN LFB1 ON T001~BUKRS = LFB1~BUKRS
+*          INNER JOIN LFA1 ON LFB1~LIFNR = LFA1~LIFNR
+*WHERE T001~BUKRS IN S_BUKRS.
+*
+*LOOP AT it_final into wa_final.
+*  WRITE :/ wa_final-bukrs,wa_final-butxt,wa_final-lifnr,wa_final-name1.
+*ENDLOOP.
+*==================================================================================================================================
+
+*==================================================================================================================================
+* Left Outer Join
+*==================================================================================================================================
+* Based on the given company codes to display the company codes , comapany names and customer numbers and also display the
+* Comapny details , if the company have no customers.(Left outer Join )
+*TABLES t001.
+*SElect-OPTIONS s_bukrs for t001-bukrs.
+*
+*TYPES : BEGIN OF ty_final,
+*        bukrs TYPE t001-bukrs,
+*        butxt TYPE t001-butxt,
+*        kunnr TYPE knb1-kunnr,
+*        end of ty_final.
+*
+*DATA : wa_final TYPE ty_final,
+*       it_final TYPE table of ty_final.
+*
+*SELECT t001~bukrs t001~butxt knb1~kunnr into TABLE it_final
+*  from t001 left outer join knb1 on t001~bukrs = knb1~bukrs
+*  WHERE t001~bukrs in s_bukrs.
+*
+*Loop at it_final INTO wa_final.
+*  WRITE :/ wa_final-bukrs , wa_final-butxt , wa_final-kunnr.
+*ENDLOOP.
+*==================================================================================================================================
+
+
+
+* Based on the given customer numbers to display the customer number , customer names , sales document number , document date,
+* item numbers , material numbers , material descriptions and net value by using inner join.
+* We have -> KUNNR Name1 VBELN AUDAT POSNR MATNR  MAKTX NETWR
+TABLES KNA1.
+SELECT-OPTIONS S_KUNNR FOR KNA1-KUNNR.
+TYPES : BEGIN OF TY_FINAL,
+          KUNNR TYPE KNA1-KUNNR,
+          NAME1 TYPE KNA1-NAME1,
+          VBELN TYPE VBAK-VBELN,
+          AUDAT TYPE VBAK-AUDAT,
+          POSNR TYPE VBAP-POSNR,
+          MATNR TYPE VBAP-MATNR,
+          MAKTX TYPE MAKT-MAKTX,
+          NETWR TYPE VBAP-NETWR,
+        END OF TY_FINAL.
+DATA : WA_FINAL TYPE TY_FINAL,
+       IT_FINAL TYPE TABLE OF TY_FINAL.
+SELECT KNA1~KUNNR KNA1~NAME1 VBAK~VBELN VBAK~AUDAT VBAP~POSNR VBAP~MATNR MAKT~MAKTX VBAP~NETWR INTO TABLE IT_FINAL
+  FROM KNA1 INNER JOIN VBAK ON KNA1~KUNNR = VBAK~KUNNR
+            INNER JOIN VBAP ON VBAK~VBELN = VBAP~VBELN
+            INNER JOIN MAKT ON VBAP~MATNR = MAKT~MATNR
+  WHERE KNA1~KUNNR IN S_KUNNR AND MAKT~SPRAS = SY-LANGU.
+LOOP AT IT_FINAL INTO WA_FINAL.
+  WRITE :/ WA_FINAL-KUNNR ,
+           WA_FINAL-NAME1 ,
+           WA_FINAL-VBELN ,
+           WA_FINAL-AUDAT ,
+           WA_FINAL-POSNR ,
+           WA_FINAL-MATNR ,
+           WA_FINAL-MAKTX ,
+           WA_FINAL-NETWR .
+ENDLOOP.
