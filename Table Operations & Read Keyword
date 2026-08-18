@@ -1,0 +1,85 @@
+REPORT ZAB_05.
+*=================================================================================================
+*types : BEGIN OF ty_kna1,
+*        kunnr type kna1-kunnr,
+*        name1 type kna1-name1,
+*        ort01 type kna1-ort01,
+*        end of ty_kna1.
+*
+*data : wa_kna1 type ty_kna1,
+*       it_kna1 type table of ty_kna1.
+*
+*select kunnr name1 ort01 from kna1 into TABLE it_kna1 UP TO 5 rows.
+*
+*loop at it_kna1 into wa_kna1.
+*  write :/ wa_kna1-kunnr,wa_kna1-name1,wa_kna1-ort01.
+*endloop.
+*uline.
+*=================================================================================================
+*Example of Collect
+*TYPES : BEGIN OF TY,
+*          EID(10) TYPE C,
+*          ESAL    TYPE I,
+*        END OF TY.
+*
+*DATA WA TYPE TY.
+*
+*DATA IT TYPE HASHED TABLE OF TY WITH UNIQUE KEY EID.
+*
+*WA-EID = '101'.
+*WA-ESAL = '15000'.
+*COLLECT WA INTO IT.
+*
+*WA-EID = '102'.
+*WA-ESAL = '5000'.
+*COLLECT WA INTO IT.
+*
+*WA-EID = '104'.
+*WA-ESAL = '1000'.
+*COLLECT WA INTO IT.
+*WRITE 'Before Adding the fields'.
+*LOOP AT IT INTO WA.
+*  WRITE:/ WA-EID,WA-ESAL.
+*ENDLOOP.
+*
+*
+*ULINE.
+*
+*WA-EID = '103'.
+*WA-ESAL = '2000'.
+*COLLECT WA INTO IT.
+*
+*WA-EID = '104'.
+*WA-ESAL = '1000'.
+*COLLECT WA INTO IT.
+*
+*WRITE 'After Adding the fields'.
+*LOOP AT IT INTO WA.
+*  WRITE:/ WA-EID,WA-ESAL.
+*ENDLOOP.
+*ULINE.
+*=================================================================================================
+*TYPES : BEGIN OF TY_T001,
+*          BUKRS TYPE T001-BUKRS,
+*          BUTXT TYPE T001-BUTXT,
+*          ORT01 TYPE T001-ORT01,
+*        END OF TY_T001.
+*
+*DATA : WA_T001 TYPE TY_T001,
+*       IT_T001 TYPE TABLE OF TY_T001.
+*
+*SELECT BUKRS BUTXT ORT01 FROM T001 INTO TABLE IT_T001 UP TO 5 ROWS.
+*
+* LOOP AT IT_T001 INTO WA_T001.
+*   WRITE:/ WA_T001-BUKRS,WA_T001-BUTXT,WA_T001-ORT01.
+*ENDLOOP.
+*
+*ULINE.
+*
+*READ TABLE IT_T001 INTO WA_T001 INDEX 2.
+*WRITE:/ WA_T001-BUKRS , WA_T001-BUTXT ,WA_T001-ORT01.
+*
+*ULINE.
+*
+*READ TABLE IT_T001 INTO WA_T001 WITH KEY ORT01 = 'DELHI'.
+*WRITE:/ WA_T001-BUKRS , WA_T001-BUTXT ,WA_T001-ORT01.
