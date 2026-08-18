@@ -1,0 +1,90 @@
+REPORT zab_04.
+*Singular - Parameter
+*Plural - Select-options
+* Based on the countries to display company number , company name and cities
+*DATA a TYPE t001-ort01.
+*SELECT-OPTIONS s_ort01 FOR a.
+*
+*DATA : BEGIN OF wa_t001,
+*         bukrs TYPE t001-bukrs,
+*         butxt TYPE t001-butxt,
+*         ort01 TYPE t001-ort01,
+*       END OF wa_t001.
+*
+*DATA it_t001 LIKE TABLE OF wa_t001.
+*
+*SELECT bukrs butxt ort01 FROM t001 INTO TABLE it_t001 WHERE ort01 IN s_ort01.
+*
+*
+*LOOP AT it_t001 INTO wa_t001.
+*  WRITE :/ wa_t001-bukrs,
+*           wa_t001-butxt,
+*           wa_t001-ort01.
+*ENDLOOP.
+* Based on the given company code to display the company code , company name and city
+*PARAMETERS p_bukrs TYPE t001-bukrs.
+*DATA : BEGIN OF wa,
+*         bukrs TYPE t001-bukrs,
+*         butxt TYPE t001-butxt,
+*         ort01 TYPE t001-ort01,
+*       END OF wa.
+*
+*DATA it LIKE TABLE OF wa.
+*
+*SELECT bukrs butxt ort01 FROM t001 INTO TABLE it WHERE bukrs = p_bukrs.
+*
+*LOOP AT it INTO wa.
+*  WRITE :/ wa-bukrs,
+*           wa-butxt,
+*           wa-ort01.
+*ENDLOOP.
+*ULINE.
+*Based on the given vendor numbers and countries to display vendor name , vendor number , cities and country.
+*DATA : a TYPE lfa1-lifnr,
+*       b TYPE kna1-ort01.
+*
+*SELECT-OPTIONS s_lifnr FOR a.
+*SELECT-OPTIONS s_ort01 FOR b.
+*
+*DATA : BEGIN OF wa,
+*         lifnr TYPE lfa1-lifnr,
+*         name1 TYPE lfa1-name1,
+*         ort01 TYPE lfa1-ort01,
+*         land1 TYPE lfa1-land1,
+*       END OF wa.
+*
+*DATA it LIKE TABLE OF wa.
+*
+*SELECT lifnr name1 ort01 land1 FROM lfa1 INTO TABLE it WHERE lifnr IN s_lifnr AND ort01 IN s_ort01.
+*
+*LOOP AT it INTO wa.
+*  WRITE :/ wa-lifnr,wa-name1,wa-ort01,wa-land1.
+*ENDLOOP.
+*ULINE.
+*Manually filling data eid,ename,eadd into internal table.
+DATA : BEGIN OF wa,
+         eid(10)   TYPE c,
+         ename(25) TYPE c,
+         eadd(10)   TYPE c,
+       END OF wa.
+DATA it LIKE TABLE OF wa.
+wa-eid = '1'.
+wa-ename = 'Abhay'.
+wa-eadd = 'Delhi'.
+APPEND wa to it.
+wa-eid = '2'.
+wa-ename = 'Ranjeet'.
+wa-eadd = 'Jaitpur'.
+append wa to it.
+wa-eid = '3'.
+wa-ename = 'Tarun'.
+wa-eadd = 'Palwal'.
+append wa to it.
+wa-eid = '4'.
+wa-ename = 'Sumant'.
+wa-eadd = 'Begusarai'.
+append wa to it.
+loop at it into wa.
+  write :/ wa-eid,wa-ename,wa-eadd.
+endloop.
+uline.
